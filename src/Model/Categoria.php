@@ -10,7 +10,6 @@ use DateTime; //importando a classe interna do PHP DateTime
 
 class Categoria
 {
-   
-
+    public string $nome;
 }
 

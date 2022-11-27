@@ -31,9 +31,17 @@ VALUES
 
 SELECT * FROM tb_alunos;
 
-INSERT INTO tb_professores
-(nome, endereco, formacao, status, cpf)
+CREATE DATABASE db_categorias;
+
+USE db_categorias;
+
+CREATE TABLE tb_categorias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL
+);
+
+INSERT INTO tb_categorias
+(nome)
 VALUES
-('Alessandro','Rua barca semi nova 123', 'HTML, CSS, JS, React', true, '12345612345'),
-('Allan','Rua idelfonso albano 222, ap 1403', 'SABE TUDO, BRABISSIMO', true, '99999999999'),
-('Gleidson', 'Rua oscar frança 88', 'Formado nas ruas', true, '22222222222');
+('Marketing Digital');
+
