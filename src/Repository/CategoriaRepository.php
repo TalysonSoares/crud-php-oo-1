@@ -31,4 +31,15 @@ class CategoriaRepository
 
         return $query->fetchAll(PDO::FETCH_CLASS, Categoria::class); //pegando os dados e tranformando em array
     }
+
+    public function inserir(object $dados): object
+    {
+
+        $sql = "INSERT INTO " . self::TABLE . 
+            "(nome) " .  "VALUES ('{$dados->nome}');";
+
+        $this->pdo->query($sql);
+
+        return $dados;
+    }
 }

@@ -28,12 +28,8 @@ $rotas = [
     '/cursos/editar' => criarRota(CursoController::class, 'editar'),
     '/cursos/excluir' => criarRota(CursoController::class, 'excluir'),
 
-    '/professores/listar' => criarRota(ProfessorController::class, 'listar'),
-    '/professores/novo' => criarRota(ProfessorController::class, 'cadastrar'),
-    '/professores/editar' => criarRota(ProfessorController::class, 'editar'),
-    '/professores/excluir' => criarRota(ProfessorController::class, 'excluir'),
-
-    '/categorias/listar' => criarRota(CategoriaController::class, 'listar')
+    '/categorias/listar' => criarRota(CategoriaController::class, 'listar'),
+    '/categorias/novo' => criarRota(CategoriaController::class, 'cadastrar')
 ];
 
 return $rotas;
