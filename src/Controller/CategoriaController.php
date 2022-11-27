@@ -36,7 +36,7 @@ class CategoriaController extends AbstractController
         try {
             $rep->inserir($categoria);
         } catch (Exception $exception) {
-            if (true === str_contains($exception->getMessage(), 'nome')) {
+            if (true === str_contains($exception->getMessage(), 'categoria')) {
                 die('Esta categoria já existe');
             }
             
@@ -44,5 +44,27 @@ class CategoriaController extends AbstractController
         }
 
         $this->redirect('/categorias/listar');
+    }
+
+    public function editar(): void
+    {
+        $id = $_GET['id'];
+        $rep = new CategoriaRepository();
+        $categoria = $rep->buscarUm($id);
+        $this->render('categorias/editar', [$categoria]);
+        if (false === empty($_POST)) {
+            $categoria->nome = $_POST['nome'];
+        
+            try {
+                $rep->atualizar($categoria, $id);
+            } catch (Exception $exception) {
+                if (true === str_contains($exception->getMessage(), 'nome')) {
+                    die('Esta categoria já existe');
+                }
+    
+                die('Vish, aconteceu um erro');
+            }
+            $this->redirect('/categorias/listar');
+        }
     }
 }
