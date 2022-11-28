@@ -67,4 +67,12 @@ class CategoriaController extends AbstractController
             $this->redirect('/categorias/listar');
         }
     }
+
+    public function excluir(): void
+    {
+        $id = $_GET['id'];
+        $rep = new CategoriaRepository();
+        $rep->excluir($id);
+        $this->redirect('/categorias/listar');
+    }
 }

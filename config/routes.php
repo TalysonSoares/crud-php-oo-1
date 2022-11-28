@@ -31,6 +31,7 @@ $rotas = [
     '/categorias/listar' => criarRota(CategoriaController::class, 'listar'),
     '/categorias/novo' => criarRota(CategoriaController::class, 'cadastrar'),
     '/categorias/editar' => criarRota(CategoriaController::class, 'editar'),
+    '/categorias/excluir' => criarRota(CategoriaController::class, 'excluir'),
 ];
 
 return $rotas;
