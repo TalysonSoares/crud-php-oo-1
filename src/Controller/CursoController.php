@@ -4,11 +4,22 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-class CursoController 
+use App\Model\Curso;
+use App\Repository\CursoRepository;
+use Dompdf\Dompdf;
+use Exception;
+
+class CursoController extends AbstractController
 {
     public function listar(): void
     {
-        echo "Pagina de listar";
+        $rep = new CursoRepository();
+
+        $cursos = $rep->buscarTodos();
+
+        $this->render('curso/listar', [
+            'cursos' => $cursos,
+        ]);
     }
 
     public function cadastrar(): void

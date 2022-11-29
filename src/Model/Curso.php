@@ -1,6 +1,6 @@
 <?php
 
-declare(stricty_types=1);
+declare(strict_types=1);
 
 namespace App\Model;
 
@@ -10,5 +10,5 @@ class Curso
     public int $cargaHoraria;
     public string $descricao;
     public bool $status;
-    public array $ementa;
+    public int $categoria_id;
 }
