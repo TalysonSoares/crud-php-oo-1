@@ -16,7 +16,7 @@ class CategoriaRepository
 
     public function __construct()
     {
-        $this->pdo =  DatabaseConnection::abrirConexaoCateg();
+        $this->pdo =  DatabaseConnection::abrirConexao();
     }
 
     public function buscarTodos(): iterable
