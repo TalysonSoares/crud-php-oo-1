@@ -31,17 +31,5 @@ VALUES
 
 SELECT * FROM tb_alunos;
 
-CREATE DATABASE db_categorias;
 
-USE db_categorias;
-
-CREATE TABLE tb_categorias (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL
-);
-
-INSERT INTO tb_categorias
-(nome)
-VALUES
-('Marketing Digital');
 

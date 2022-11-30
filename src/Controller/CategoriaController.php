@@ -19,6 +19,7 @@ class CategoriaController extends AbstractController
         $this->render('categorias/listar', [
             'categorias' => $categorias,
         ]);
+
     }
 
     public function cadastrar(): void

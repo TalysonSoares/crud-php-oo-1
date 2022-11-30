@@ -31,4 +31,15 @@ class CursoRepository
 
         return $query->fetchAll(PDO::FETCH_CLASS, Curso::class); //pegando os dados e tranformando em array
     }
+
+    public function inserir(object $dados): object
+    {
+        $sql = "INSERT INTO " . self::TABLE . 
+        "(nome, cargaHoraria, descricao, status, categoria_id) " . 
+        "VALUES ('{$dados->nome}', '{$dados->cargaHoraria}', '{$dados->descricao}', true ,'{$dados->categoria_id}');";
+
+        $this->conexao->query($sql);
+
+        return $dados;
+    }
 }

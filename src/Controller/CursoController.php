@@ -24,7 +24,28 @@ class CursoController extends AbstractController
 
     public function cadastrar(): void
     {
-        echo "Pagina de cadastrar";
+        if (true === empty($_POST)) {
+            $this->render('curso/cadastrar');
+            return;
+        }
+
+        $curso = new Curso();
+        $curso->nome = $_POST['nome'];
+        $curso->cargaHoraria = $_POST['cargaHoraria'];
+        $curso->descricao = $_POST['descricao'];
+        $curso->categoria = $_POST['categoria'];
+        
+        try {
+            $this->repository->inserir($curso);
+        } catch (Exception $exception) {
+            if (true === str_contains($exception->getMessage(), 'nome')) {
+                die('Este curso já existe');
+            }
+
+            die('Vish, aconteceu um erro');
+        }
+
+        $this->redirect('/cursos/listar');
     }
 
     public function excluir(): void

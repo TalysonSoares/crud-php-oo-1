@@ -29,7 +29,7 @@
                             <td>{$curso->status}</td>
                             <td>{$curso->categoria}</td>
                             <td>
-                                    <a href='/categorias/editar?id={$categoria->id}' class='btn btn-outline-warning btn-sm'>Editar</a>
+                                    <a href='/cursos/editar?id={$curso->id}' class='btn btn-outline-warning btn-sm'>Editar</a>
                                     <button type='button' class='btn btn-outline-danger btn-sm' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>
                                         Excluir
                                     </button>
@@ -45,7 +45,7 @@
                                             </div>
                                             <div class='modal-footer'>
                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Me acovardarei</button>
-                                                <a href='/categorias/excluir?id={$categoria->id}' class='btn btn-danger'>Mate o insolente!</a>
+                                                <a href='/cursos/excluir?id={$curso->id}' class='btn btn-danger'>Mate o insolente!</a>
                                             </div>
                                             </div>
                                         </div>
