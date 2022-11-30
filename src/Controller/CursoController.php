@@ -78,4 +78,6 @@ class CursoController extends AbstractController
             $this->redirect('/cursos/listar');
         }
     }
+
+    
 }
