@@ -21,15 +21,15 @@ class CategoriaRepository
 
     public function buscarTodos(): iterable
     {
-        $sql = 'SELECT * FROM ' . self::TABLE;
+        $conexao = DatabaseConnection::abrirConexao();
 
-        //preparando para executar no banco
-        $query = $this->pdo->query($sql);
+        $sql = "SELECT * FROM ".self::TABLE;
 
-        //executando o comando lá no banco de dados
-        $query->execute(); 
+        $query = $conexao->query($sql);
 
-        return $query->fetchAll(PDO::FETCH_CLASS, Categoria::class); //pegando os dados e tranformando em array
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_CLASS, Categoria::class);
     }
 
     public function buscarUm(string $id): object

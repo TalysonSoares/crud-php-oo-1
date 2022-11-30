@@ -95,22 +95,11 @@ class AlunoController extends AbstractController
 
     }
 
-    public function relatorio(): void
+    public function gerandoPDF():void
     {
-        $hoje = date('d/m/Y');
-
-        $design = "
-            <h1>Relatorio de Alunos</h1>
-            <hr>
-            <em>Gerado em {$hoje}</em>
-        ";
-
-        $dompdf = new Dompdf();
-        $dompdf->setPaper('A4', 'portrait'); // tamanho da pagina
-
-        $dompdf->loadHtml($design); //carrega o conteudo do PDF
-
-        $dompdf->render(); //aqui renderiza 
-        $dompdf->stream(); //é aqui que a magica acontece
+       $dados = $this->repository->buscarTodos();
+       $this->relatorio("aluno", [
+           'alunos' => $dados,
+       ]);
     }
 }

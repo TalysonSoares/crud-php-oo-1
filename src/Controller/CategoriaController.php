@@ -10,6 +10,13 @@ use Exception;
 
 class CategoriaController extends AbstractController
 {
+    private CategoriaRepository $repository;
+
+    public function __construct()
+    {
+        $this->repository = new CategoriaRepository();
+    }
+
     public function listar(): void
     {
         $rep = new CategoriaRepository();
@@ -75,5 +82,13 @@ class CategoriaController extends AbstractController
         $rep = new CategoriaRepository();
         $rep->excluir($id);
         $this->redirect('/categorias/listar');
+    }
+
+    public function pdf():void
+    {
+       $dados = $this->repository->buscarTodos();
+       $this->relatorio("categorias", [
+           'categorias' => $dados,
+       ]);
     }
 }

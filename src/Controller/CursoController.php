@@ -79,5 +79,11 @@ class CursoController extends AbstractController
         }
     }
 
-    
+    public function pdf():void
+    {
+       $dados = $this->repository->buscarTodos();
+       $this->relatorio("curso", [
+           'cursos' => $dados,
+       ]);
+    }
 }
