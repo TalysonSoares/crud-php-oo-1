@@ -6,11 +6,19 @@ namespace App\Controller;
 
 use App\Model\Curso;
 use App\Repository\CursoRepository;
+use App\Repository\CategoriaRepository;
 use Dompdf\Dompdf;
 use Exception;
 
 class CursoController extends AbstractController
 {
+    private CursoRepository $repository;
+
+    public function __construct()
+    {
+        $this->repository = new CursoRepository();
+    }
+
     public function listar(): void
     {
         $rep = new CursoRepository();
@@ -24,8 +32,10 @@ class CursoController extends AbstractController
 
     public function cadastrar(): void
     {
+        $rep = new CategoriaRepository();
         if (true === empty($_POST)) {
-            $this->render('curso/cadastrar');
+            $categorias = $rep->buscarTodos();
+            $this->render("/curso/cadastrar", ['categorias' => $categorias]);
             return;
         }
 
@@ -33,11 +43,12 @@ class CursoController extends AbstractController
         $curso->nome = $_POST['nome'];
         $curso->cargaHoraria = $_POST['cargaHoraria'];
         $curso->descricao = $_POST['descricao'];
-        $curso->categoria = $_POST['categoria'];
+        $curso->categoria_id =intval($_POST['categoria']);
         
         try {
             $this->repository->inserir($curso);
         } catch (Exception $exception) {
+            var_dump($exception->getMessage());
             if (true === str_contains($exception->getMessage(), 'nome')) {
                 die('Este curso já existe');
             }
