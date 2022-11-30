@@ -2,8 +2,6 @@
 
 use App\Controller\AlunoController;
 use App\Controller\CursoController;
-use App\Controller\ProfessorController;
-use App\Controller\SiteController;
 use App\Controller\CategoriaController;
 
 function criarRota(string $controllerNome, string $methodNome): array
@@ -15,7 +13,7 @@ function criarRota(string $controllerNome, string $methodNome): array
 }
 
 $rotas = [
-    '/' => criarRota(SiteController::class, 'inicio'),
+    '/' => criarRota(CursoController::class, 'listar'),
     
     '/alunos/listar' => criarRota(AlunoController::class, 'listar'),
     '/alunos/novo' => criarRota(AlunoController::class, 'cadastrar'),
