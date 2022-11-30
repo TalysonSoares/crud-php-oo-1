@@ -1,0 +1,33 @@
+<section class="mt-3 card card-body">
+    <h1>Editar Curso</h1>
+
+    <div class="row">
+        <div class="col">
+            <form action="" method="POST">
+                <label for="nome">Nome</label>
+                <input name="nome" type="text" class="form-control mb-3" value="<?php echo $curso->nome; ?>">
+
+                <label for="descricao">Descrição</label>
+                <input name="descricao" type="text" class="form-control mb-3" value="<?php echo $curso->descricao; ?>">
+
+                <label for="cargaHoraria">Carga Horária</label>
+                <input name="cargaHoraria" type="text" class="form-control mb-3" value="<?php echo $curso->cargaHoraria; ?>">
+
+                <label for="categoria">Categoria</label>
+                <select name="categoria" class="form-control mb-3">
+                    <?php
+                        foreach($categorias as $categoria){
+                            if($categoria->id == $curso->categoria_id){
+                                echo "<option selected value='{$categoria->id}'>{$categoria->nome}</option>";
+                            }else{
+                                echo "<option value='{$categoria->id}'>{$categoria->nome}</option>";
+                            }
+                        }
+                    ?>
+                </select>
+                <button class="btn btn-primary">Pronto</button>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</section>

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\Curso;
-use App\Repository\CursoRepository;
 use App\Repository\CategoriaRepository;
-use Dompdf\Dompdf;
+use App\Repository\CursoRepository;
 use Exception;
 
 class CursoController extends AbstractController
 {
+
     private CursoRepository $repository;
 
     public function __construct()
@@ -22,16 +22,16 @@ class CursoController extends AbstractController
     public function listar(): void
     {
         $rep = new CursoRepository();
-
         $cursos = $rep->buscarTodos();
 
-        $this->render('curso/listar', [
+        $this->render("curso/listar", [
             'cursos' => $cursos,
         ]);
     }
 
     public function cadastrar(): void
     {
+        
         $rep = new CategoriaRepository();
         if (true === empty($_POST)) {
             $categorias = $rep->buscarTodos();
@@ -41,20 +41,11 @@ class CursoController extends AbstractController
 
         $curso = new Curso();
         $curso->nome = $_POST['nome'];
-        $curso->cargaHoraria = $_POST['cargaHoraria'];
         $curso->descricao = $_POST['descricao'];
-        $curso->categoria_id =intval($_POST['categoria']);
-        
-        try {
-            $this->repository->inserir($curso);
-        } catch (Exception $exception) {
-            var_dump($exception->getMessage());
-            if (true === str_contains($exception->getMessage(), 'nome')) {
-                die('Este curso já existe');
-            }
+        $curso->cargaHoraria = intval($_POST['cargaHoraria']);
+        $curso->categoria_id = intval($_POST['categoria']);
 
-            die('Vish, aconteceu um erro');
-        }
+        $this->repository->inserir($curso);
 
         $this->redirect('/cursos/listar');
     }
@@ -66,6 +57,22 @@ class CursoController extends AbstractController
 
     public function editar(): void
     {
-        echo "Pagina de editar";
+        $id = $_GET['id'];
+        $rep = new CategoriaRepository();
+        $categorias = $rep->buscarTodos();
+        $curso = $this->repository->buscarUm($id);
+        $this->render("/curso/editar", [
+            'categorias' => $categorias,
+            'curso' => $curso
+        ]);
+        if (false === empty($_POST)) {
+            $curso = new Curso();
+            $curso->nome = $_POST['nome'];
+            $curso->descricao = $_POST['descricao'];
+            $curso->cargaHoraria = intval($_POST['cargaHoraria']);
+            $curso->categoria_id = intval($_POST['categoria']);
+            $this->repository->atualizar($curso, $id);
+            $this->redirect('/cursos/listar');
+        }
     }
 }
